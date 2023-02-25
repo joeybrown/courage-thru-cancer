@@ -1,13 +1,69 @@
 export function applyFilter(): void {
-  const year = document.getElementById('year-filters').value;
-  const type = document.getElementById('type-filters').value;
-  console.log('YEAR FILTER: ' + year);
-  console.log('type FILTER: ' + type);
+  const yearFilter = (
+    document.getElementById('year-filters') as HTMLInputElement
+  ).value;
+  const typeFilter = (
+    document.getElementById('type-filters') as HTMLInputElement
+  ).value;
+  console.log('YEAR FILTER: ' + yearFilter);
+  console.log('type FILTER: ' + typeFilter);
+
+  const filterHtml = VideoFilter.renderFilter();
+  const filteredVideos = videos.filter((video) => {
+    if (yearFilter == 'all') {
+      // No year filter at all
+      if (typeFilter == 'all') {
+        // No type and year filter specified
+        return true;
+      } else {
+        //Tpe filter only
+        if (video.cancerTypes.includes(typeFilter)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } else {
+      // There was a year filter
+      if (typeFilter == 'all') {
+        // No type filter but need to filter by years
+        if (video.year == yearFilter) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        //Both a year and type filter were specified
+        if (
+          video.year === yearFilter &&
+          video.cancerTypes.includes(typeFilter)
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+  });
+  const filteredVideosHtml = CardList.renderAllVideos(filteredVideos);
+
+  // Need to stick this html somewhere! Maybe add a div with an id to the html.
+  const html = `${filteredVideosHtml}`;
+  //Replace not append
+  document.getElementById('gc-all-video').innerHTML = html;
+
+  //Re apply the function declarations
+  document.getElementById('type-filters').onchange = function () {
+    applyFilter();
+  };
+  document.getElementById('year-filters').onchange = function () {
+    applyFilter();
+  };
 }
 
 class VideoFilter {
   static renderFilter: () => string = () => {
-    let html = '<div>';
+    let html = '<div id="myfiltercustomcancer">';
     html += '<label for="filter">Filter </label><br/>';
     html += `<label for="year-filter-custom">Choose a year:</label>
     <select onmousedown="this.value='';" name="year-filter-custom-values" id="year-filters">
@@ -20,9 +76,12 @@ class VideoFilter {
     <label for="type-filter-custom">Choose a type:</label>
     <select onmousedown="this.value='';" name="type-filter-custom-values" id="type-filters">
     <option value="all">None</option>
-        <option value="breast">breast</option>
-        <option value="testicular">testicular</option>
-    </select>`;
+    <option value="Non-Hodgkin's Lymphoma">Non-Hodgkin's Lymphoma</option>
+    <option value="Colon">Colon</option>
+    <option value="Liver">Liver</option>
+    <option value="Abdominal">Abdominal</option>
+    <option value="Brain">Brain</option>
+</select>`;
     html += '</div>';
     return html;
   };
@@ -65,21 +124,7 @@ export class CardList {
     html += '</div>';
     return html;
   };
-
-  // Rendering filtered videos should not be grouped. Slightly different style.
-  static renderFilteredVideos(videos: Video[], filterText: string): string {
-    let html = '<div>';
-    html += `<h2>${filterText}</h2>`;
-    html += '<div>';
-    for (const video of videos) {
-      const card = new Card(video);
-      html += card.render();
-    }
-    html += '</div>';
-    return html;
-  }
 }
-
 class Video {
   constructor(
     name: string,
@@ -114,10 +159,8 @@ const videos: Video[] = [
 ];
 
 export async function initialRender(): Promise<void> {
-  const allVideos = await Promise.resolve(videos);
-
   const filterHtml = VideoFilter.renderFilter();
-  const allVideosHtml = CardList.renderAllVideos(allVideos);
+  const allVideosHtml = CardList.renderAllVideos(videos);
 
   // Need to stick this html somewhere! Maybe add a div with an id to the html.
   const html = `<div>${filterHtml}${allVideosHtml}</div>`;
