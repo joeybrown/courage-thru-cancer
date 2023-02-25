@@ -18,6 +18,9 @@ export async function greeter(name: string): Promise<string> {
   return await delayedHello(name, Delays.Long);
 }
 
-const hey = await greeter('Hello');
+export async function main(): Promise<void> {
+  const hey = await greeter('Hello');
+  console.log(hey);
+}
 
-console.log(hey);
+main();
