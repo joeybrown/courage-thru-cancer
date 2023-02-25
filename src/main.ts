@@ -75,11 +75,14 @@ class VideoFilter {
     <option value="Thyroid">Thyroid</option>
     <option value="Ewing Sarcoma">Ewing Sarcoma</option>
     <option value="Bladder">Bladder</option>
+    <option value="Lung">Lung</option>
     <option value="Oral">Oral</option>
     <option value="Testicular">Testicular</option>
     <option value="Esophageal">Esophageal</option>
     <option value="Ocular">Ocular</option>
     <option value="Leukemia">Leukemia</option>
+    <option value="Non-Hodgkin's Lymphoma">Non-Hodgkin's Lymphoma</option>
+    <option value="Hodgkin's Lymphoma">Hodgkin's Lymphoma</option>
     <option value="Ovarian">Ovarian</option>
     <option value="Renal">Renal</option>
     <option value="Melanoma">Melanoma</option>
@@ -177,7 +180,7 @@ class Video {
 
 const videos: Video[] = [
   // 2015
-  new Video('Gerry Finney', ["Non-Hodgkin's Lymphoma"], '2015', 'td8xtLj34UM'),
+  new Video('Gerry Finney', ["Hodgkin's Lymphoma"], '2015', 'td8xtLj34UM'),
   new Video('Dana Burkett', ['Colon'], '2015', 'oZpjT-juRfE'),
   new Video('Zeke Logan', ['Liver'], '2015', 'cTdNaladdj4'),
   new Video('Patric Crump', ['Abdominal'], '2015', 'U8yUG936ksA'),
@@ -232,12 +235,12 @@ const videos: Video[] = [
   // empty
 
   // 2021
-  new Video('Ryan Swanson', ["Non-Hodgkin's Lymphoma"], '2021', 'cT_O3W1u94M'),
+  new Video('Ryan Swanson', ["Hodgkin's Lymphoma"], '2021', 'cT_O3W1u94M'),
   new Video('Amy Pollan', ['Breast'], '2021', 'O98-w1aiWyY'),
   new Video("Lori D'Entremont", ['Ovarian'], '2021', 'AppcYPbAqaM'),
   new Video('Allen Goode', ['Testicular', 'Melanoma'], '2021', 'NAr3Xg7pf1Y'),
   new Video('Hunter Deen', ['Testicular'], '2021', '7gU0UNeRSVY'),
-  new Video('Jeff Earnest', ["Non-Hodgkin's Lymphoma"], '2021', 'VeD8g-kAglg'),
+  new Video('Jeff Earnest', ["Hodgkin's Lymphoma"], '2021', 'VeD8g-kAglg'),
   new Video('Lynn Herzke', ['Ovarian'], '2021', 'jisIPW2bng0'),
   new Video('Latoya Dotson', ['Breast'], '2021', 'AC2qxdr2mZQ'),
 
@@ -249,28 +252,26 @@ const videos: Video[] = [
   new Video('Ed Leet', ['Breast'], '2022', 'IBLruLO2bNo'),
   new Video('Danita Brown', ['Breast'], '2022', 'Gr061iN6Jac'),
   new Video('Abbey Miesse', ['Breast'], '2022', '0ec38zC9R8I'),
+  //  new Video('Ethan Daniel', ['Leukemia'], '2022', '0ec38zC9R8I'),
+  new Video('Mark Bran', ['Lung'], '2022', 'PusZ6noYA_o'),
+  new Video(
+    'Kristina Bran Thomas',
+    ["Hodgkin's Lymphoma"],
+    '2022',
+    'PusZ6noYA_o',
+  ),
 
   // 2023
-  // new Video('Joyce Cobb', [''], '2023', ''),
-  // new Video('George Klein', ['Throat'], '2023', ''),
-  // new Video('Emily Thomas', ['Oral'], '2023', ''),
-  // new Video('Melissa Corzine', ['Breast'], '2023', ''),
-  // new Video('Kimberly Jessop', ['Melanoma'], '2023', ''),
-  // new Video('Bailey Jessop', ['Bone'], '2023', ''),
-  // new Video('Alyssa De Jong', ['Melanoma'], '2023', ''),
-  // new Video('Tuler West', ['Leukemia'], '2023', ''),
-  // new Video('Remco De Jong', ['Throat'], '2023', ''),
-  // new Video('Trey Erwin', ['Pancreatic'], '2023', ''),
-  // new Video('Dakota Cunningham', ['Leukemia'], '2023', ''),
-  // new Video('John Rose', ['Brain'], '2023', ''),
-  // new Video('Emily Hines', ['Leukemia'], '2023', ''),
-  // new Video('McKendree Walker', ['Thyroid'], '2023', ''),
-  // new Video('Hannah Tate', ['Kidney'], '2023', ''),
-  // new Video('Kristina Hunsucker', ['Ewing Sarcoma'], '2023', ''),
-  // new Video('Trevor Trumbo', ['Brain'], '2023', ''),
-  // new Video('Carson Head', ['Bone'], '2023', ''),
-  // new Video('Cassy Culunga', ['Brain'], '2023', ''),
-  //new Video('Keri Burnette', ['Breast'], '2023', ''),
+
+  new Video('Ethan Daniel', ['Leukemia'], '2022', 's8Ub7iSyFME'),
+  new Video('Joyce Cobb', [''], '2019', '_26HeRexcYY'),
+  new Video('Keri Burnette', ['Breast'], '2022', 'weY59ihwAS8'),
+  new Video('George Klein', ['Throat'], '2021', 'td_UoJWVzng'),
+  new Video('Melissa Corzine', ['Breast'], '2019', '7Vu2RfN4ieY'),
+  new Video('Trey Erwin', ['Pancreatic'], '2019', 'bpWWLB6pWfw'),
+  new Video('Trevor Trumbo', ['Brain'], '2017', '94kZ_zN9Nss'),
+  new Video('Carson Head', ['Bone'], '2017', 'zUZpJlLLCcU'),
+  new Video('Cassy Culunga', ['Brain'], '2017', 'kGU0jnaR5IE'),
 ];
 
 export async function initialRender(): Promise<void> {
