@@ -1,13 +1,13 @@
 
-// class VideoFilter {
-//   static renderFilter: () => string = () => {
-//     let html = '<div>';
-//     html += '<label for="filter">Filter</label>';
-//     html += '<input type="text" id="filter" name="filter" onkeyup="filterVideoByYear()" />';
-//     html += '</div>';
-//     return html;
-//   }
-// }
+class VideoFilter {
+  static renderFilter: () => string = () => {
+    let html = '<div>';
+    html += '<label for="filter">Filter</label>';
+    html += '<input type="text" id="filter" name="filter" onkeyup="filterVideoByYear()" />';
+    html += '</div>';
+    return html;
+  }
+}
 
 export class Card {
   constructor(public readonly video: Video) {
@@ -88,79 +88,19 @@ const videos: Video[] = [
   new Video('Zeke Logan', ['Liver'], '2015', ''),
   new Video('Patric Crump', ['Abdominal'], '2015', ''),
   new Video('Jayde Gordon', ['Brain'], '2015', ''),
-
-  // 2016
-  // 1
-  // 2
-  // 3
-  // 4
-  // 5
-  // 6
-  // 7
-  // 8
-  // 9
-
-  // 2017
-  // 1
-  // 2
-  // 3
-  // 4
-  // 5
-  // 6
-  // 7
-  // 8
-
-  // 2018
-  // 1
-  // 2
-  // 3
-  // 4
-  // 5
-  // 6
-  // 7
-  // 8
-
-  // 2019
-  // 1
-  // 2
-  // 3
-  // 4
-  // 5
-  // 6
-  // 7
-
-  // 2020
-  // empty
-
-  // 2021
-  // 1
-  // 2
-  // 3
-  // 4
-  // 5
-  // 6
-  // 7
-  // 8
-
-  // 2022
-  // 1
-  // 2
-  // 3
-  // 4
-  // 5
-  // 6
-  // 7
 ];
-
-// This is a promise just in case we get this from a different source in the future.
-export async function getVideos(): Promise<Video[]> {
-  return Promise.resolve(videos);
-}
 
 export async function initialRender(): Promise<void> {
 
-  const videos = await getVideos();
-  console.log(videos);
+  const allVideos = await Promise.resolve(videos);
+
+  const filterHtml = VideoFilter.renderFilter();
+  const allVideosHtml = CardList.renderAllVideos(allVideos);
+
+  // Need to stick this html somewhere! Maybe add a div with an id to the html.
+  const html = `<div>${filterHtml}${allVideosHtml}</div>`;
+
+  console.log(html);
 }
 
 initialRender();
