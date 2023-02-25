@@ -10,8 +10,6 @@ export function applyFilter(): void {
   const typeFilter = (
     document.getElementById('type-filters') as HTMLInputElement
   ).value;
-  console.log('YEAR FILTER: ' + yearFilter);
-  console.log('type FILTER: ' + typeFilter);
 
   const filteredVideos = videos.filter(video =>
     (yearFilter === 'all' || video.year === yearFilter) &&
@@ -33,16 +31,26 @@ export function applyFilter(): void {
   };
 }
 
+const distinctYears: () => string[] = () => {
+  const years = videos.map((item) => item.year).sort();
+  return [...new Set(years)].sort();
+}
+
+const distinctCancerTypes: () => string[] = () => {
+  const cancerTypes = videos.flatMap((item) => item.cancerTypes);
+  return [...new Set(cancerTypes)].sort();
+}
+
 class VideoFilter {
   static renderFilter: () => string = () => {
 
-    const cancerTypeOptions = videos
-      .flatMap(video => video.cancerTypes)
+    const cancerTypeOptions = distinctCancerTypes()
       .map(cancerType => `<option value="${cancerType}">${cancerType}</option>`)
       .join('');
 
-    const yearOptions = videos
-      .map(video => `<option value="${video.year}">${video.year}</option>`)
+    const yearOptions = distinctYears()
+      .map(year => `<option value="${year}">${year}</option>`)
+      .join('');
 
     let html = '<div>';
     html += '<label for="filter">Filter </label><br/>';
@@ -65,10 +73,7 @@ class VideoFilter {
 export class Card {
   constructor(public readonly video: Video) { }
 
-  private videoFrame: (height: number, width: number) => string = (
-    height,
-    width,
-  ) =>
+  private videoFrame: (height: number, width: number) => string = (height, width) =>
     `<iframe width="${width}" height="${height}" src="https://www.youtube.com/embed/${this.video.youtubeSlug}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
 
   render(): string {
@@ -236,7 +241,6 @@ export async function initialRender(): Promise<void> {
   document.getElementById('year-filters').onchange = function (): void {
     applyFilter();
   };
-  console.log(html);
 }
 
 initialRender();
