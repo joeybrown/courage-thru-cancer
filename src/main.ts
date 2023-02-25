@@ -1,3 +1,4 @@
+import { Video, videos } from "./video.js";
 
 export enum Delays {
   Short = 500,
@@ -18,9 +19,16 @@ export async function greeter(name: string): Promise<string> {
   return await delayedHello(name, Delays.Long);
 }
 
-export async function main(): Promise<void> {
+// This is a promise just in case we get this from a different source in the future.
+export async function getVideos(): Promise<Video[]> {
+  return Promise.resolve(videos);
+}
+
+export async function initialRender(): Promise<void> {
+
+
   const hey = await greeter('Hello');
   console.log(hey);
 }
 
-main();
+initialRender();

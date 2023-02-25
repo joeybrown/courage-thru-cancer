@@ -17,9 +17,11 @@ export class Card {
 
 export class CardList {
 
+  static allVideosId = 'gc-all-video';
+
   // Rendering all videos should be grouped by year.
-  static renderAllVideos(videos: Video[]): string {
-    let html = '<div>';
+  static renderAllVideos: (videos: Video[]) => string = (videos: Video[]) => {
+    let html = `<div id="${this.allVideosId}">`;
     const years = [...new Set(videos.map((item) => item.year))]
     for (const year of years) {
       html += `<h2>${year}</h2>`;
