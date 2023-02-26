@@ -32,7 +32,7 @@ export function applyFilter(): void {
 }
 
 const distinctYears: () => string[] = () => {
-  const years = videos.map((item) => item.year).sort();
+  const years = videos.map((item) => item.year).sort().reverse();
   return [...new Set(years)].sort();
 }
 
