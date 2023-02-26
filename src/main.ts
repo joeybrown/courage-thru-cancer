@@ -17,12 +17,8 @@ export function applyFilter(): void {
 
   const filteredVideosHtml = CardList.renderAllVideos(filteredVideos);
 
-  // Need to stick this html somewhere! Maybe add a div with an id to the html.
   const html = `${filteredVideosHtml}`;
-  //Replace not append
   document.getElementById('gc-all-video').innerHTML = html;
-
-  //Re apply the function declarations
   document.getElementById('type-filters').onchange = function (): void {
     applyFilter();
   };
