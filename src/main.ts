@@ -32,12 +32,12 @@ export function applyFilter(): void {
 }
 
 const distinctYears: () => string[] = () => {
-  const years = videos.map((item) => item.year).sort().reverse();
+  const years = videos.map((item) => item.year).filter(x=>x.length).sort().reverse();
   return [...new Set(years)].sort();
 }
 
 const distinctCancerTypes: () => string[] = () => {
-  const cancerTypes = videos.flatMap((item) => item.cancerTypes);
+  const cancerTypes = videos.flatMap((item) => item.cancerTypes).filter(x=>x.length);
   return [...new Set(cancerTypes)].sort();
 }
 
@@ -55,12 +55,12 @@ class VideoFilter {
     let html = '<div>';
     html += '<label for="filter">Filter </label><br/>';
     html += `<label for="type-filter-custom">Choose a type:</label>
-    <select onmousedown="this.value='';" name="type-filter-custom-values" id="type-filters">
+    <select name="type-filter-custom-values" id="type-filters">
       <option value="all">None</option>
       ${cancerTypeOptions}
     </select>
     <label for="year-filter-custom">Choose a year:</label>
-    <select onmousedown="this.value='';" name="year-filter-custom-values" id="year-filters">
+    <select name="year-filter-custom-values" id="year-filters">
       <option value="all">None</option>
       ${yearOptions}
     </select>
